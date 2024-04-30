@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import Auth from "./pages/auth/Auth";
+import { createStackNavigator } from "@react-navigation/stack";
+import Onbording from "./pages/onbording/Onbording";
+import { StatusBar } from "react-native";
+import "react-native-gesture-handler";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Onbording"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen
+          name="Onbording"
+          component={Onbording}
+          options={{ title: "Rewise" }}
+        />
+        <Stack.Screen
+          name="Auth"
+          component={Auth}
+          options={{ title: "Auth" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
